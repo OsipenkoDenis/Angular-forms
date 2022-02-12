@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Hero } from '../hero'; 
 
@@ -13,9 +13,9 @@ export class HeroFormComponent implements OnInit {
   
   ngOnInit() {
       this.form = new FormGroup({
-        name: new FormControl(""),
+        name: new FormControl("", Validators.required),
         alterEgo: new FormControl(""),
-        heroPower: new FormControl("Really Smart")
+        heroPower: new FormControl("Really Smart", Validators.required)
       })
   }
 
@@ -26,7 +26,6 @@ export class HeroFormComponent implements OnInit {
   submitted = false;
 
   onSubmit() { 
-    console.log(this.form);
     this.submitted = true; }
 
   newHero() {
