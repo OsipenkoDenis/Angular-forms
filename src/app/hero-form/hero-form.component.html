@@ -2,24 +2,9 @@
     <div *ngIf="!submitted">
         <h1>Hero Form</h1>
         <form #heroForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label for="name">Name</mat-label>
-                <input matInput class="form-control" formControlName="name">
-                <mat-error *ngIf="form.hasError('required', 'name')">Name is required</mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label for="alterEgo">Alter Ego</mat-label>
-                <input matInput type="text" class="form-control" id="alterEgo" name="alterEgo" formControlName="alterEgo">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="example-full-width">
-                <mat-label for="power">Hero Power</mat-label>
-                <mat-select class="form-control" id="power" required name="power" formControlName="heroPower">
-                    <mat-option *ngFor="let pow of powers" [value]="pow">{{pow}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.hasError('required', 'heroPower')">Power is required</mat-error>
-            </mat-form-field>
+            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
             <button mat-stroked-button color="primary" type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>
-            <button mat-stroked-button color="primary" type="button" class="btn btn-default" (click)="newHero(); form.reset()">New Hero</button>
+            <button mat-stroked-button color="primary" type="button" class="btn btn-default" (click)="form.reset()">New Hero</button>
         </form>
     </div>
 
@@ -27,15 +12,15 @@
         <h2>You submitted the following:</h2>
         <div class="row">
             <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{ form.get("name").value }}</div>
+            <div class="col-xs-9">{{ model.name}}</div>
         </div>
         <div class="row">
             <div class="col-xs-3">Alter Ego</div>
-            <div class="col-xs-9">{{ form.get("alterEgo").value }}</div>
+            <div class="col-xs-9">{{ model.alterEgo }}</div>
         </div>
         <div class="row">
             <div class="col-xs-3">Power</div>
-            <div class="col-xs-9">{{ form.get("heroPower").value }}</div>
+            <div class="col-xs-9">{{ model.heroPower }}</div>
         </div>
         <br>
         <button mat-stroked-button color="primary" class="btn btn-primary" (click)="submitted=false">Edit</button>
